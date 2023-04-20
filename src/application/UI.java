@@ -29,18 +29,23 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-	
+
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
 	public static ChessPosition readChessPosition(Scanner input) {
 		try {
-			
+
 			String s = input.nextLine();
 			char column = s.charAt(0);
-			// recortando a parte final da string "a1, b2, d8, etc."  
+			// recortando a parte final da string "a1, b2, d8, etc."
 			// e transformando em inteiro
 			int row = Integer.parseInt(s.substring(1));
-			
+
 			return new ChessPosition(column, row);
-			
+
 		} catch (RuntimeException error) {
 			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
 		}
@@ -71,5 +76,5 @@ public class UI {
 		}
 		System.out.print(" ");
 	}
-	
+
 }
